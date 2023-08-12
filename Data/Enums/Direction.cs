@@ -1,4 +1,4 @@
-﻿namespace ElevatorSystem.Enums
+﻿namespace ElevatorSystem.Data.Enums
 {
     public enum Direction
     {
