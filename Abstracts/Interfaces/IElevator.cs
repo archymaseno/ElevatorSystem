@@ -10,7 +10,7 @@
         int CurrentCapacity { get; }
         void AddPassengers(List<Passenger> passengers);
         void MoveToFloor(int targetFloor);
-        void DisplayElevatorStatus();
+        void DisplayElevatorStatus(string moveOrDrop);
         void UpdateCapacity(int peopleCount);
         void UpdateMovementStatus();
     }

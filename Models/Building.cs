@@ -1,4 +1,6 @@
-﻿namespace ElevatorSystem.Models
+﻿using ElevatorSystem.Abstracts.Interfaces;
+
+namespace ElevatorSystem.Models
 {
     public class Building : IBuilding
     {
@@ -23,7 +25,7 @@
         public Elevator FindBestElevator(int targetFloor)
         {
 
-            // We check for all available elevators where we check the cuarrying capacity  
+            // We check for all available elevators where we check the carrying to maxcapacity  
             List<Elevator> NotFullElevators = Elevators.Where(elevator => elevator.NotFull(targetFloor)).ToList();
 
             if (NotFullElevators.Count == 0)
@@ -32,22 +34,28 @@
             }
 
             Elevator? bestElevator = null;
+            Elevator? alternativeElevator = null;
             int shortestDistance = int.MaxValue; // Initialize with a large value
 
 
-            foreach (Elevator elevator in NotFullElevators)
+            foreach (Elevator elevator in NotFullElevators)  //lets get them based on how close they are to the calling flooor
             {
                 int distance = Math.Abs(elevator.CurrentFloor - targetFloor);
 
-                //The elevator should also be headed towards the target floor
-                if (elevator.IsInbound(targetFloor))
+                //The elevator should closest the be headed towards the target floor as option 1 or stopped as option2 otherwise we have to just pick the inbound which is not close
+                if ((distance < shortestDistance) && ((elevator.IsInbound(targetFloor)) || (elevator.Direction == Direction.None))) //we get the best elevator based on direction and distance
                 {
-                    if (distance < shortestDistance)
+                    bestElevator = elevator;
+                    shortestDistance = distance;
+                }
+                else //We miseed one evaluators,we need to get second best based on distance either inbound or stopped
+                {
+                    if ((distance < shortestDistance) & (elevator.Direction == Direction.None))//It is far but so far is the only available lift
                     {
                         bestElevator = elevator;
-                        shortestDistance = distance;
                     }
                 }
+
             }
 
             return bestElevator;
@@ -72,8 +80,6 @@
             Console.WriteLine();
             Console.WriteLine($" > Setting {destinations.Count} waiting passengers on floor {floorNumber}");
             Console.WriteLine();
-            // Automatically call the nearest elevator after setting waiting passengers
-            // CallElevator(floorNumber, destinations.Count);
         }
 
         public void ShowFloorStatus()

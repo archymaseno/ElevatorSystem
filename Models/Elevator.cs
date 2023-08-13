@@ -18,14 +18,14 @@
         {
             ID = id;
             CurrentFloor = 1;
-            Direction = Direction.Up;
+            Direction = Direction.None;
             MaxCapacity = maxCapacity;
             CurrentCapacity = 0;
             Passengers = new List<Passenger>();
             this.maxFloorCount = maxFloorCount;
 
         }
-        public void ChangeDirectionAtExtremes()
+        public void ChangeDirectionAtExtremes()// It still has passengers
         {
             if (CurrentFloor == 1 || CurrentFloor == maxFloorCount)
             {
@@ -67,14 +67,17 @@
             {
                 Direction = Direction.Up;
                 MovementStatus = ElevatorMovementStatus.Moving;
-                for (int floor = CurrentFloor + 1; floor <= targetFloor; floor++)
+                for (int floor = CurrentFloor; floor <= targetFloor; floor++)
                 {
                     CurrentFloor = floor;
-                    DisplayElevatorStatus();
                     if (ShouldDropOff())
                     {
                         DropOffPassengers();
-                        DisplayElevatorStatus(); // Display elevator status after drop-off
+                        break;
+                    }
+                    else
+                    {
+                        DisplayElevatorStatus("move");
                     }
                     Thread.Sleep(1500);
                 }
@@ -86,11 +89,15 @@
                 for (int floor = CurrentFloor; floor >= targetFloor; floor--)
                 {
                     CurrentFloor = floor;
-                    DisplayElevatorStatus();
+
                     if (ShouldDropOff())
                     {
                         DropOffPassengers();
-                        DisplayElevatorStatus(); // Display elevator status after drop-off
+                        break;
+                    }
+                    else
+                    {
+                        DisplayElevatorStatus("move");
                     }
                     Thread.Sleep(1500);
                 }
@@ -127,15 +134,54 @@
                 // Continue to next drop-off if there are remaining passengers
                 if (Passengers.Any())
                 {
-                    int nextDestination = Passengers.Min(passenger => passenger.DestinationFloor);
-                    MoveToFloor(nextDestination);
+                    int nextDestination;
+                    if (Direction == Direction.Up)
+                    {
+                        nextDestination = Passengers.Max(passenger => passenger.DestinationFloor);
+                        if (passengersToDropOff.Count > 0)
+                        {
+                            DisplayElevatorStatus("drop"); // Display elevator status after drop-off                       
+                        }
+                        MoveToFloor(nextDestination);
+                    }
+                    else if (Direction == Direction.Down)
+                    {
+                        nextDestination = Passengers.Min(passenger => passenger.DestinationFloor);
+                        if (passengersToDropOff.Count > 0)
+                        {
+                            DisplayElevatorStatus("drop"); // Display elevator status after drop-off                       
+                        }
+                        MoveToFloor(nextDestination);
+                    }                    
+                }
+                else
+                {
+                    if(passengersToDropOff.Any()) // probably the last dropped passenger
+                    {
+                        int nextDestination = passengersToDropOff.Min(passenger => passenger.DestinationFloor);
+                        DisplayElevatorStatus("drop"); // Display elevator status after drop-off      
+                        MoveToFloor(nextDestination);
+                    }
+                    Direction = Direction.None;
+                    MovementStatus = ElevatorMovementStatus.Stopped;
                 }
 
             }
         }
-        public void DisplayElevatorStatus()
+        public void DisplayElevatorStatus(string moveOrDrop)
         {
-            Console.WriteLine($" << Elevator {ID} < Going: {Direction}< Ststus :{MovementStatus} < Floor: {CurrentFloor} < Passengers: {CurrentCapacity}/ {MaxCapacity} Dropping at Floors: {string.Join(", ", Passengers.Select(passenger => passenger.DestinationFloor))}");
+            switch (moveOrDrop)
+            {
+                case "move":
+                    Console.WriteLine($" << Elevator {ID} < Going: {Direction}< Status :{MovementStatus} < Floor: {CurrentFloor} < Passengers: {CurrentCapacity}/ {MaxCapacity} Dropping at Floors: {string.Join(", ", Passengers.Select(passenger => passenger.DestinationFloor))}");
+                    break;
+                case "drop":                  
+                    Console.WriteLine($" == Elevator {ID} < Dropping Passengers at Floor: {CurrentFloor}");
+                    
+                    break;
+                default: break;
+            }
+
         }
         public void UpdateCapacity(int peopleCount)
         {
