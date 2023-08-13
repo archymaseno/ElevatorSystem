@@ -12,6 +12,8 @@
             while (true)
             {
                 Console.WriteLine();
+                Console.WriteLine("-----------ELEVATOR SIMULATOR --------------");
+                Console.WriteLine();
                 Console.WriteLine("1. Select Floor and Set Passengers");
                 Console.WriteLine("2. Show Elevator Status");
                 Console.WriteLine("3. Show Floor Status");

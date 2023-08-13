@@ -13,7 +13,7 @@
         public int TargetFloor { get; private set; }
         public ElevatorMovementStatus MovementStatus { get; private set; }
         private int maxFloorCount;
-
+        
         public Elevator(int id, int maxCapacity, int maxFloorCount)
         {
             ID = id;
