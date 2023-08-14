@@ -15,8 +15,6 @@ namespace ElevatorSystem
             IBuilding building = new Building(numberOfFloors, numberOfElevators, maxElevatorCapacity);
             ElevatorController controller = new ElevatorController(building);
             controller.Run();
-
-
         }
     }
 }

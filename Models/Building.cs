@@ -73,7 +73,12 @@
 
             foreach (int destination in destinations)
             {
-                floor.WaitingPassengers.Add(new Passenger(destination));
+                if (floor.Number != destination)
+                {
+                    if (destination < 1 || destination > Floors.Count)
+                        continue;
+                    floor.WaitingPassengers.Add(new Passenger(destination));
+                }
             }
             Console.WriteLine();
             Console.WriteLine($" > Setting {destinations.Count} waiting passengers on floor {floorNumber}");

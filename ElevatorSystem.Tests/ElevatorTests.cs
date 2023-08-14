@@ -38,6 +38,6 @@ namespace ElevatorSystem.Tests
             Assert.AreEqual(2, elevator.CurrentCapacity);
         }
 
-       
+      
     }
 }
