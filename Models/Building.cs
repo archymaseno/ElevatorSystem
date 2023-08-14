@@ -1,6 +1,4 @@
-﻿using ElevatorSystem.Abstracts.Interfaces;
-
-namespace ElevatorSystem.Models
+﻿namespace ElevatorSystem.Models
 {
     public class Building : IBuilding
     {
@@ -34,7 +32,7 @@ namespace ElevatorSystem.Models
             }
 
             Elevator? bestElevator = null;
-            Elevator? alternativeElevator = null;
+            // Elevator? alternativeElevator = null;
             int shortestDistance = int.MaxValue; // Initialize with a large value
 
 

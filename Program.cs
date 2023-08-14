@@ -1,11 +1,7 @@
-﻿global using ElevatorSystem;
-global using ElevatorSystem.Services;
-global using ElevatorSystem.Abstracts.Interfaces;
+﻿global using ElevatorSystem.Abstracts.Interfaces;
 global using ElevatorSystem.Data.Enums;
 global using ElevatorSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+global using ElevatorSystem.Services;
 
 namespace ElevatorSystem
 {

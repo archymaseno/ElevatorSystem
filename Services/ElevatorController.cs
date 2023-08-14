@@ -94,7 +94,7 @@
             Console.WriteLine($"----------------");
             foreach (Elevator elevator in building.Elevators)
             {
-                Console.WriteLine($"Elevator {elevator.ID}  at Floor: {elevator.CurrentFloor}  Going: {elevator.Direction}  Load: {elevator.CurrentCapacity}/{elevator.MaxCapacity}");
+                Console.WriteLine($"Elevator {elevator.ID}  at Floor: {elevator.CurrentFloor}  Direction: {elevator.Direction}  Load: {elevator.CurrentCapacity}/{elevator.MaxCapacity}");
             }
 
             Console.WriteLine("-----------------------------------------------------------------------------------------");

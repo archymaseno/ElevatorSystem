@@ -13,7 +13,7 @@
         public int TargetFloor { get; private set; }
         public ElevatorMovementStatus MovementStatus { get; private set; }
         private int maxFloorCount;
-        
+
         public Elevator(int id, int maxCapacity, int maxFloorCount)
         {
             ID = id;
@@ -152,11 +152,11 @@
                             DisplayElevatorStatus("drop"); // Display elevator status after drop-off                       
                         }
                         MoveToFloor(nextDestination);
-                    }                    
+                    }
                 }
                 else
                 {
-                    if(passengersToDropOff.Any()) // probably the last dropped passenger
+                    if (passengersToDropOff.Any()) // probably the last dropped passenger
                     {
                         int nextDestination = passengersToDropOff.Min(passenger => passenger.DestinationFloor);
                         DisplayElevatorStatus("drop"); // Display elevator status after drop-off      
@@ -175,9 +175,9 @@
                 case "move":
                     Console.WriteLine($" << Elevator {ID} < Going: {Direction}< Status :{MovementStatus} < Floor: {CurrentFloor} < Passengers: {CurrentCapacity}/ {MaxCapacity} Dropping at Floors: {string.Join(", ", Passengers.Select(passenger => passenger.DestinationFloor))}");
                     break;
-                case "drop":                  
+                case "drop":
                     Console.WriteLine($" == Elevator {ID} < Dropping Passengers at Floor: {CurrentFloor}");
-                    
+
                     break;
                 default: break;
             }
