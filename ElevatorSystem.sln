@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElevatorSystem", "ElevatorSystem.csproj", "{F92ABFCC-2D4A-4682-B50B-53D011C1A170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "..\ElevatorSimulator2\TestProject1\TestProject1.csproj", "{FF7EFD62-2BBD-4246-8A06-92B1642E0153}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElevatorSystem.Tests", "ElevatorSystem.Tests\ElevatorSystem.Tests.csproj", "{16F196E5-8405-4086-975A-BC50B131F672}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{F92ABFCC-2D4A-4682-B50B-53D011C1A170}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F92ABFCC-2D4A-4682-B50B-53D011C1A170}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F92ABFCC-2D4A-4682-B50B-53D011C1A170}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF7EFD62-2BBD-4246-8A06-92B1642E0153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF7EFD62-2BBD-4246-8A06-92B1642E0153}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF7EFD62-2BBD-4246-8A06-92B1642E0153}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF7EFD62-2BBD-4246-8A06-92B1642E0153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F196E5-8405-4086-975A-BC50B131F672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F196E5-8405-4086-975A-BC50B131F672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F196E5-8405-4086-975A-BC50B131F672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F196E5-8405-4086-975A-BC50B131F672}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
