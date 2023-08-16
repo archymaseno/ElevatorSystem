@@ -163,7 +163,7 @@
                         MoveToFloor(nextDestination);
                     }
                     Direction = Direction.None;
-                    MovementStatus = ElevatorMovementStatus.Stopped;
+                    MovementStatus = ElevatorMovementStatus.AtFloor;
                 }
 
             }
