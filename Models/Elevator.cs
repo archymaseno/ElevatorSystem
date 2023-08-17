@@ -1,20 +1,18 @@
-﻿namespace ElevatorSystem.Models
-{
-    public class Elevator : IElevator
-    {
-        public int ID { get; private set; }
-        public int Capacity { get; private set; }
-        public int CurrentFloor { get; private set; }
-        public Direction Direction { get; private set; }
-        public int CurrentLoad { get; private set; }
-        public List<Passenger> Passengers { get; private set; }
-        public int MaxCapacity { get; private set; }
-        public int CurrentCapacity { get; private set; }
-        public int TargetFloor { get; private set; }
-        public ElevatorMovementStatus MovementStatus { get; private set; }
-        private int maxFloorCount;
+﻿using ElevatorSystem.Abstracts.AbstractClasses;
 
-        public Elevator(int id, int maxCapacity, int maxFloorCount)
+namespace ElevatorSystem.Models
+{
+    public class Elevator : ElevatorBase, IElevator
+    {
+
+
+        public int Capacity { get; private set; }     
+        public int CurrentLoad { get; private set; }    
+
+        private int maxFloorCount;      
+        public int TargetFloor { get; private set; }
+
+        public Elevator(int id,int maxCapacity,int maxFloorCount)
         {
             ID = id;
             CurrentFloor = 1;
@@ -23,7 +21,6 @@
             CurrentCapacity = 0;
             Passengers = new List<Passenger>();
             this.maxFloorCount = maxFloorCount;
-
         }
         public void ChangeDirectionAtExtremes()// It still has passengers
         {
@@ -31,7 +28,8 @@
             {
                 Direction = Direction == Direction.Up ? Direction.Down : Direction.Up;
             }
-        }
+        }      
+
         public bool NotFull(int targetFloor)
         {
             return CurrentCapacity < MaxCapacity;
@@ -51,17 +49,8 @@
 
             return Inbound;
         }
-        public void AddPassengers(List<Passenger> passengers)
-        {
-            if (CurrentCapacity + passengers.Count > MaxCapacity)
-            {
-                Console.WriteLine("Elevator is at maximum capacity. Cannot add more passengers.");
-                return;
-            }
-            Passengers.AddRange(passengers);
-            CurrentCapacity += passengers.Count;
-        }
-        public void MoveToFloor(int targetFloor)
+
+        public override void MoveToFloor(int targetFloor)
         {
             if (targetFloor > CurrentFloor)
             {
@@ -168,21 +157,7 @@
 
             }
         }
-        public void DisplayElevatorStatus(string moveOrDrop)
-        {
-            switch (moveOrDrop)
-            {
-                case "move":
-                    Console.WriteLine($" << Elevator {ID} < Going: {Direction}< Status :{MovementStatus} < Floor: {CurrentFloor} < Passengers: {CurrentCapacity}/ {MaxCapacity} Dropping at Floors: {string.Join(", ", Passengers.Select(passenger => passenger.DestinationFloor))}");
-                    break;
-                case "drop":
-                    Console.WriteLine($" == Elevator {ID} < Dropping Passengers at Floor: {CurrentFloor}");
 
-                    break;
-                default: break;
-            }
-
-        }
         public void UpdateCapacity(int peopleCount)
         {
             CurrentLoad = peopleCount;

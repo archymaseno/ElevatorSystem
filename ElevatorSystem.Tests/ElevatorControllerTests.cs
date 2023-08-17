@@ -24,9 +24,7 @@ namespace ElevatorSystem.Tests
             // Assert
             Elevator elevator = building.Elevators.First();
             Assert.AreEqual(targetFloor, elevator.CurrentFloor);
-        }
-
-       
+        }       
 
         [TestMethod]
         public void CallElevator_NoAvailableElevators_ShouldNotMoveElevator()
